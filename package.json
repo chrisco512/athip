@@ -7,7 +7,8 @@
     "dev": "next",
     "build": "next build",
     "flow": "flow",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,10 @@
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "flow-bin": "^0.51.0"
+    "enzyme": "^2.9.1",
+    "flow-bin": "^0.51.0",
+    "jest": "^20.0.4",
+    "react-addons-test-utils": "^15.6.0",
+    "react-test-renderer": "^15.6.1"
   }
 }
