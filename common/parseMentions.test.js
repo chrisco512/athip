@@ -21,9 +21,9 @@ test('multiple mention of same person returns a single entry', () => {
 });
 
 test('correctly parses mentions with - and _ characters', () => {
-  expect(parseMentions('@chris-cordle')).toEqual(['chris-cordle']);
+  expect(parseMentions('@chris-cordle')).toEqual(['chris']);
   expect(parseMentions('@chris_cordle')).toEqual(['chris_cordle']);
-  expect(parseMentions('what up @chris-cordle_255?!!!')).toEqual(['chris-cordle_255']);
+  expect(parseMentions('what up @chris-cordle_255?!!!')).toEqual(['chris']);
 });
 
 test('correctly parses mentions with numeric characters', () => {
@@ -57,5 +57,5 @@ test('mentions of several users parse correctly', () => {
   expect(parseMentions('what if @chris and @jon joined?')).toEqual(['chris', 'jon']);
   expect(parseMentions('@chris @jon @jill joined #channel')).toEqual(['chris', 'jon', 'jill']);
   expect(parseMentions('@chris@jon what should the output be?')).toEqual(['chris']);
-  expect(parseMentions(' @chris-co and @JILL@jon-@chris')).toEqual(['chris-co', 'jill']);
+  expect(parseMentions(' @chris-co and @JILL@jon-@chris')).toEqual(['chris', 'jill']);
 });
