@@ -7,7 +7,8 @@ const ctxMock = (urls) => {
         urls
       }
     },
-    res: {}
+    res: {},
+    throw: jest.fn(),
   };
 };
 
@@ -15,7 +16,7 @@ test('getTitles given a single url returns a collection of url/titles with one e
   const ctx = ctxMock(['https://www.google.com']);
 
   await getTitles(ctx);
-  expect(ctx.body).toEqual([{ url: 'https://www.google.com', title: 'https://www.google.com' }]);
+  expect(ctx.body).toEqual([{ url: 'https://www.google.com', title: 'https://www.google.com/' }]);
 });
 
 test('getTitles given multiple urls returns a collection of url/titles', async () => {
@@ -23,9 +24,9 @@ test('getTitles given multiple urls returns a collection of url/titles', async (
 
   await getTitles(ctx);
   expect(ctx.body).toEqual([
-    { url: 'https://www.google.com', title: 'https://www.google.com' },
-    { url: 'https://www.yahoo.com', title: 'https://www.yahoo.com' },
-    { url: 'https://www.facebook.com', title: 'https://www.facebook.com' },
+    { url: 'https://www.google.com', title: 'https://www.google.com/' },
+    { url: 'https://www.yahoo.com', title: 'https://www.yahoo.com/' },
+    { url: 'https://www.facebook.com', title: 'https://www.facebook.com/' },
   ]);
 });
 
