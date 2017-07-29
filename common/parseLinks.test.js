@@ -1,5 +1,5 @@
 import parseLinks from './parseLinks';
-import URI from 'urijs';
+//import URI from 'urijs';
 
 test('empty chat returns an empty array', () => {
   expect(parseLinks('')).toEqual([]);

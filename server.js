@@ -2,7 +2,7 @@ const Koa = require('koa');
 const koaBody = require('koa-body');
 const next = require('next');
 const Router = require('koa-router');
-const scrape = require('html-metadata');
+const getTitles = require('./common/getTitles');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -19,17 +19,7 @@ app
     const server = new Koa();
     const router = new Router();
 
-    router.post('/api/titles', async ctx => {
-      const { urls } = ctx.request.body
-
-      const metadataCollection = await Promise.all(urls.map(async url => {
-        let metadata = await scrape(url);
-        return { url, title: metadata.general.title };
-      }));
-
-      ctx.body = metadataCollection;
-      ctx.res.statusCode = 200;
-    });
+    router.post('/api/titles', getTitles);
 
     router.get('*', async ctx => {
       await handle(ctx.req, ctx.res);
