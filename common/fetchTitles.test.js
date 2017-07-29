@@ -7,6 +7,6 @@ describe('fetchTitles', async () => {
 
   test('fetchTitles should call superagent', async () => {
     let response = await fetchTitles(['http://www.google.com']);
-    expect(response.body).toEqual([{ title: 'Google', url: 'google.com' }]);
+    expect(response).toEqual([{ title: 'Google', url: 'google.com' }]);
   });
 })

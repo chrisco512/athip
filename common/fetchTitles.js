@@ -10,7 +10,8 @@ export default async function fetchTitles(urls) {
       .set('Accept', 'application/json');
   } catch (err) {
     console.log('Error: ', err);
+    return [];
   }
 
-  return response;
+  return response.body;
 }
