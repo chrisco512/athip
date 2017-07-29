@@ -13,7 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "html-metadata": "^1.6.3",
     "koa": "^2.3.0",
+    "koa-body": "^2.3.0",
     "koa-router": "^7.2.1",
     "lodash": "^4.17.4",
     "next": "^2.4.7",

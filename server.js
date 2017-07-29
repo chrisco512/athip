@@ -20,11 +20,14 @@ app
     const router = new Router();
 
     router.post('/api/titles', async ctx => {
-      var url = "http://blog.woorank.com/2013/04/dublin-core-metadata-for-seo-and-usability/";
+      const { urls } = ctx.request.body
 
-      var metadata = await scrape(url);
+      const metadataCollection = await Promise.all(urls.map(async url => {
+        let metadata = await scrape(url);
+        return { url, title: metadata.general.title };
+      }));
 
-      ctx.body = JSON.stringify(metadata);
+      ctx.body = metadataCollection;
       ctx.res.statusCode = 200;
     });
 
