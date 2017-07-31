@@ -5,7 +5,7 @@ export default async function fetchTitles(urls) {
 
   try {
     response = await request
-      .post('http://localhost:3000/api/titles')
+      .post('/api/titles')
       .send({ urls })
       .set('Accept', 'application/json');
   } catch (err) {
