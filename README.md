@@ -20,6 +20,7 @@ Links are URLs contained in the chat text. Parsed URLs are sent to the server to
 ```
 @chris do you want some food from www.tacobell.com (taco)?
 ```
+
 ## Example Parsed JSON Output
 ```json
 {
