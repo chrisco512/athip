@@ -1,45 +1,32 @@
-const Koa = require('koa');
-const koaBody = require('koa-body');
-const next = require('next');
-const Router = require('koa-router');
+const express = require('express')
+const next = require('next')
+const bodyParser = require('body-parser');
+const asyncMiddleware = require('./utils/asyncMiddleware');
+
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
+
 const getTitles = require('./common/getTitles');
 
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({ dev });
-const handle = app.getRequestHandler();
+app.prepare()
+.then(() => {
+  const server = express();
 
-process.on('SIGINT', function() {
-  console.log('SIGINT');
-  process.exit();
-});
+  server.use(bodyParser.json());
 
-app
-  .prepare()
-  .then(() => {
-    const server = new Koa();
-    const router = new Router();
+  server.post('/api/titles', asyncMiddleware(async (req, res) => {
+    const urlTitles = await getTitles(req.body.urls);
 
-    router.post('/api/titles', getTitles);
+    res.send(urlTitles);
+  }));
 
-    router.get('*', async ctx => {
-      await handle(ctx.req, ctx.res);
-      ctx.respond = false;
-    });
-
-    server.use(async (ctx, next) => {
-      try {
-        await next();
-      } catch (err) {
-        ctx.status = err.status || 500;
-        ctx.body = err.message;
-        ctx.app.emit('error', err, ctx);
-      }
-    });
-
-    server.use(koaBody());
-    server.use(router.routes());
-    server.listen(3000, (err) => {
-      if (err) throw err;
-      console.log('> Ready on http://localhost:3000');
-    });
+  server.get('*', (req, res) => {
+    return handle(req, res)
   });
+
+  server.listen(3000, (err) => {
+    if (err) throw err
+    console.log('> Ready on http://localhost:3000')
+  });
+});

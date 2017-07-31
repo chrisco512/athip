@@ -1,27 +1,48 @@
 // @flow
 import React, { Component } from 'react';
+import JSONPretty from 'react-json-pretty';
+//import 'react-json-pretty/JSONPretty.monikai.styl';
+
 import parseChat from '../common/parseChat';
 
-let chat = 'what if @chris bought some (taco)?';
-let Test = ({name} : { name: string }) => (<div>Hello {name}!</div>);
+let chat = 'what if @john @chris (megusta)and @joe bought some (taco) (tacosaladreallylongstring) from www.tacobell.com?';
+//let Test = ({name} : { name: string }) => (<div>Hello {name}!</div>);
 
 class Chat extends Component {
   constructor(props) {
     super(props);
-    this.state = { chat: 'hello world' };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      chat: '',
+      parsedChat: { mentions: [], emoticons: [], links: [] },
+    };
   }
 
-  async handleClick() {
-    const parsedChat = await parseChat(chat);
-    const chatString = JSON.stringify(parsedChat);
-    this.setState({ chat : 'chatyoString' });
+  handleChange(e) {
+    this.setState({ chat: e.target.value });
+  }
+
+  async handleClick(e) {
+    e.preventDefault();
+    const parsedChat = await parseChat(this.state.chat);
+    this.setState({ parsedChat });
   }
 
   render() {
+    console.log('rendering now');
     return (
       <div>
-        <Test name={this.state.chat} />
-        <button onClick={() => this.handleClick()}>Click Me</button>
+        <form onSubmit={this.handleClick}>
+          <label>
+            Chat:
+            <input type="text" value={this.state.chat} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <JSONPretty id="json-pretty" json={this.state.parsedChat} />
       </div>
     );
   }

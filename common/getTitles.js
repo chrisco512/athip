@@ -1,8 +1,7 @@
 const URI = require('urijs');
 const scrape = require('html-metadata');
 
-async function getTitles(ctx) {
-  const { urls } = ctx.request.body
+async function getTitles(urls) {
   let metadataCollection;
 
   try {
@@ -14,11 +13,10 @@ async function getTitles(ctx) {
       return { url, title: metadata.general.title };
     }));
   } catch(err) {
-    ctx.throw(400, 'Bad URL request body format. Body must contain a url key with an array of valid URI strings.');
+    throw new Error('Bad URL request body format. Body must contain a url key with an array of valid URI strings.');
   }
 
-  ctx.body = metadataCollection;
-  ctx.res.statusCode = 200;
+  return metadataCollection;
 }
 
 module.exports = getTitles;
