@@ -1,7 +1,6 @@
-// @flow
 import URI from 'urijs';
 
-function parseLinks(chat: string) {
+function parseLinks(chat) {
   const urls = [];
 
   URI.withinString(chat, function(url) {

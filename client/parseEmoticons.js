@@ -1,7 +1,6 @@
-// @flow
 import { uniq } from 'lodash';
 
-function parseEmoticons(chat: string) {
+function parseEmoticons(chat) {
   let emoticons = chat.match(/\(([A-Za-z0-9]{1,15})\)/gim);
 
   if(emoticons) {

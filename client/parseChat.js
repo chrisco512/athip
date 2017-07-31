@@ -1,10 +1,9 @@
-// @flow
 import parseMentions from './parseMentions';
 import parseEmoticons from './parseEmoticons';
 import parseLinks from './parseLinks';
 import fetchTitles from './fetchTitles';
 
-async function parseChat(chat: string) {
+async function parseChat(chat) {
   const mentions = parseMentions(chat);
   const emoticons = parseEmoticons(chat);
   const links = parseLinks(chat);

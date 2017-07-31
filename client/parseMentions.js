@@ -1,7 +1,6 @@
-// @flow
 import { uniq } from 'lodash';
 
-function parseMentions(chat: string) {
+function parseMentions(chat) {
   let mentions = chat.match(/\B\@\w+/gim);
 
   if(mentions) {
