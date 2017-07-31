@@ -7,7 +7,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const getTitles = require('./common/getTitles');
+const getTitles = require('./server/getTitles');
 
 app.prepare()
 .then(() => {

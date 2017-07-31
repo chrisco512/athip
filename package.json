@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-plugin-stylus-compiler": "^1.4.0",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "html-metadata": "^1.6.3",
@@ -23,6 +24,8 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-json-pretty": "^1.6.3",
+    "react-json-view": "^1.11.4",
+    "react-no-ssr": "^1.1.0",
     "superagent": "^3.5.2",
     "urijs": "^1.18.10"
   },
