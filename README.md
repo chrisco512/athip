@@ -1,5 +1,5 @@
 # FE Coding Exercise
-Example app that parses chat text into structured JSON.
+Example app that parses chat text into structured JSON. Demo is deployed at [https://at2-mhciysbdqd.now.sh/](https://at2-mhciysbdqd.now.sh/)
 
 ## Getting Started
 
