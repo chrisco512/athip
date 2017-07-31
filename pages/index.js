@@ -4,6 +4,7 @@ import JSONPretty from 'react-json-pretty';
 
 import Header from '../client/head';
 import parseChat from '../client/parseChat';
+import { colors } from '../constants/styles';
 
 class Chat extends Component {
   constructor(props) {
@@ -11,11 +12,18 @@ class Chat extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
 
     this.state = {
       chat: '',
       parsedChat: { mentions: [], emoticons: [], links: [] },
     };
+  }
+
+  handleKeyPress(e) {
+    if(e.which === 13) {
+      this.handleSubmit(e);
+    }
   }
 
   handleChange(e) {
@@ -52,11 +60,8 @@ class Chat extends Component {
         <Header />
         <div className="page-container">
           <form className="chat-form" onSubmit={this.handleSubmit}>
-            <label>
-              Chat:
-              <input className="js-copytextarea" type="text" value={this.state.chat} onChange={this.handleChange} />
-            </label>
-            <input type="submit" value="Submit" />
+            <textarea placeholder="Enter chat text here then press submit" className="chat-input" type="text" value={this.state.chat} onChange={this.handleChange} onKeyPress={(e) => this.handleKeyPress(e)} />
+            <input className="chat-submit" type="submit" value="Submit" />
           </form>
           <div className="json-container">
             <div className="copy-button" onClick={this.handleCopyClick} onTouchEnd={this.handleCopyClick}>
@@ -71,13 +76,13 @@ class Chat extends Component {
         <textarea readOnly className="hidden-json" type="text" value={parsedChatString} />
         <style global jsx>{`
           .json-pretty {
-            color: white;
+            color: ${colors.contrast};
           }
           .json-key {
-            color: orange;
+            color: ${colors.secondary};
           }
           .json-string {
-            color: pink;
+            color: ${colors.tertiary};
           }
         `}</style>
         <style jsx>{`
@@ -85,16 +90,17 @@ class Chat extends Component {
             position: relative;
             flex-grow: 1;
             overflow-y: auto;
-            background: #272822;
+            background: ${colors.primary};
+            padding: 5px;
           }
           .copy-button {
             position: absolute;
             top: 10px;
             right: 10px;
-            color: orange;
+            color: ${colors.secondary};
           }
           .copy-button:hover {
-            color: pink;
+            color: ${colors.tertiary};
             cursor: pointer;
           }
           .hidden-json {
@@ -103,13 +109,24 @@ class Chat extends Component {
           .page-container {
             display: flex;
             flex-direction: column;
-            background: yellow;
             height: 100%;
             width: 100%;
             position: fixed;
           }
           .chat-form {
             flex-shrink: 0;
+            display: flex;
+            background: ${colors.primaryDark};
+            padding: 5px;
+          }
+          .chat-input {
+            flex-grow: 1;
+            border: 1px solid ${colors.primary};
+          }
+          .chat-submit {
+            color: white;
+            background: orange;
+            border: 1px solid ${colors.primary};
           }
         `}</style>
       </div>

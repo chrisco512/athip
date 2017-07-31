@@ -1,12 +1,14 @@
 const fonts = {
-  primary: 'Lora, Times, serif',
-  secondary: 'Slabo, Arial, sans-serif'
+  primary: 'Times, serif',
+  secondary: 'Arial, sans-serif'
 };
 
 const colors = {
-  primary: '#EB1D26',
-  secondary: '#1110EF',
-  tertiary: '#452202'
+  contrast: 'white',
+  primary: '#272822',
+  primaryDark: '#0E0F09',
+  secondary: 'orange',
+  tertiary: 'pink'
 };
 
 export { fonts, colors };
